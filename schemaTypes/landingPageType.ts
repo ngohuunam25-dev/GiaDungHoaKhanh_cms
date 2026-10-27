@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {R2FileInput} from '../src/components/R2FileInput'
 
 export const landingPageType = defineType({
   name: 'landingPage',
@@ -109,13 +110,13 @@ export const landingPageType = defineType({
           type: 'array',
           of: [
             {
-              type: 'image',
-              options: {hotspot: true},
+              type: 'object',
               fields: [
                 defineField({
-                  name: 'alt',
-                  title: 'Mô tả ảnh',
-                  type: 'string',
+                  name: 'image',
+                  title: 'Upload ảnh (Cloudflare R2)',
+                  type: 'url',
+                  components: {input: R2FileInput},
                 }),
               ],
             },
@@ -359,9 +360,9 @@ export const landingPageType = defineType({
                 }),
                 defineField({
                   name: 'image',
-                  title: 'Hình ảnh',
-                  type: 'image',
-                  options: {hotspot: true},
+                  title: 'Hình ảnh (Cloudflare R2)',
+                  type: 'url',
+                  components: {input: R2FileInput},
                 }),
                 defineField({
                   name: 'badge',

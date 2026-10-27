@@ -26,6 +26,9 @@ export default {
 	async fetch(request, env, ctx): Promise<Response> {
 		const origin = request.headers.get('Origin') ?? '';
 		const allowed = env.ALLOWED_ORIGINS.split(',');
+		console.log('origin', origin);
+		console.log('request', request);
+
 		const cors = {
 			'Access-Control-Allow-Origin': allowed.includes(origin) ? origin : allowed[0],
 			'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -62,7 +65,7 @@ export default {
 				Key: key,
 				ContentType: contentType,
 			}),
-			{ expiresIn: 300 },
+			{ expiresIn: 3000 },
 		);
 		return Response.json({ uploadUrl, publicUrl: `${env.PUBLIC_URL}/${key}`, key }, { headers: cors });
 	},
